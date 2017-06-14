@@ -75,10 +75,24 @@ class MainViewController: UIViewController {
         //mainImageView.image = UIImage(named: ("late-for-work-running"))
         //self.view.addSubview(mainImageView)
         //mainScreenMainLabel.text = "666 km/h"
-        startJogging.layer.cornerRadius = 5.0
-        startTimeJogg.layer.cornerRadius = 5.0
-        startDistanceJogg.layer.cornerRadius = 5.0
-        startCompareJogg.layer.cornerRadius = 5.0
+        startJogging.layer.cornerRadius = 10.0
+        startTimeJogg.layer.cornerRadius = 10.0
+        startDistanceJogg.layer.cornerRadius = 10.0
+        startCompareJogg.layer.cornerRadius = 10.0
+        
+        let myColor : UIColor = UIColor( red: 0.4, green: 0.4, blue:0.4, alpha: 1.0 )
+        startJogging.layer.borderColor = myColor.cgColor
+        startJogging.layer.masksToBounds = true
+        startJogging.layer.borderWidth = 1
+        startTimeJogg.layer.borderColor = myColor.cgColor
+        startTimeJogg.layer.masksToBounds = true
+        startTimeJogg.layer.borderWidth = 1
+        startDistanceJogg.layer.borderColor = myColor.cgColor
+        startDistanceJogg.layer.masksToBounds = true
+        startDistanceJogg.layer.borderWidth = 1
+        startCompareJogg.layer.borderColor = myColor.cgColor
+        startCompareJogg.layer.masksToBounds = true
+        startCompareJogg.layer.borderWidth = 1
     }
     
     override func didReceiveMemoryWarning() {

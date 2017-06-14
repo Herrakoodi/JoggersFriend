@@ -15,9 +15,13 @@ class MapViewController: UIViewController,
         MKMapViewDelegate {
     
     /*
+     TODOS:
      - handle location tracking more carefully (in case of errors)
      - maybe better NSLocationWhenInUseUsageDescription than "This app needs location priviledges" needed?
      - is JoggingState needed both in the main view and in the map view?
+        -> a class or struct that has the state? (MVC)
+        -> and/or a class of trip?
+     - traslate miles/hour to meters/hour
      */
     
     /*
@@ -61,7 +65,13 @@ class MapViewController: UIViewController,
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        stopStartButton.layer.cornerRadius = 5.0
+        // change button similar to main menu - > stack view...
+        let myColor : UIColor = UIColor( red: 0.4, green: 0.4, blue:0.4, alpha: 1.0 )
+        stopStartButton.layer.borderColor = myColor.cgColor
+        stopStartButton.layer.masksToBounds = true
+        stopStartButton.layer.borderWidth = 1
+        stopStartButton.layer.cornerRadius = 10.0
+        
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -127,7 +137,7 @@ class MapViewController: UIViewController,
             // 5 for so that we see two different animations (transition&zoom->zoom)
             // good for simulator
             // a waaay too slow for real life
-            if (locationStorage.count == 5) {
+            if (locationStorage.count == 1) {
                 let regionRadius: CLLocationDistance = 6000
                 let coordinateRegion = MKCoordinateRegionMakeWithDistance(latestLocation.coordinate,
                                                                           regionRadius * 2.0, regionRadius * 2.0)
@@ -139,7 +149,38 @@ class MapViewController: UIViewController,
                 let distanceBetween = Int(latestLocation.distance(from: prevLocation))
                 joggersDistance += distanceBetween
                 mapViewLabel.text = String(joggersDistance)
+                
+                let barViewControllers = self.tabBarController?.viewControllers
+                let svc = barViewControllers![2] as! InfoViewController
+                
+                // Quick hack
+                // Crashes if Info View has not been constructed
+                if (locationStorage.count==3) {
+                    tabBarController!.selectedIndex = 2
+                    // checking for inccorrect measures
+                    if (latestLocation.speed>0&&latestLocation.speed<300) {
+                        svc.speedLabel.text = String(latestLocation.speed)
+                    }
+                }
+                if (locationStorage.count>3) {
+                    // checking for inccorrect measures
+                    if (latestLocation.speed>0&&latestLocation.speed<300) {
+                        svc.speedLabel.text = String(latestLocation.speed)
+                    }
+                }
+                
+                
             }
+            
+            /*let testl: CLLocation = locationStorage[locationStorage.count]
+            let mikalie1 = testl.altitude
+            let mikalie2 = testl.coordinate
+            let mikalie3 = testl.course
+            let mikalie4 = testl.horizontalAccuracy
+            let mikalie5 = testl.speed
+            let mikalie6 = testl.timestamp
+            let mikalie7 = testl.verticalAccuracy
+            */
             
             let kountti = locationStorage.count
             print(kountti)
@@ -267,6 +308,15 @@ class MapViewController: UIViewController,
             
             print("ok pressed")
             print("saving the data...")
+            self.saveToJsonFile()
+            
+            
+            // tämä puis!!!
+            // let barViewControllers = self.tabBarController?.viewControllers
+            // let svc = barViewControllers![3] as! SavedViewController
+            //svc.mainScreenMainLabel.text = String(joggersDistance)
+            // svc.checkAppFilesInSandboxDefaultDocumentDirectory(fileName: "joggerdata432")
+            
         }))
         
         refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action: UIAlertAction!) in
@@ -314,5 +364,68 @@ class MapViewController: UIViewController,
         }
     }
 
+    
+    // testi // nimet uusiksi !!!
+    // do timebased filename!
+    // https://stackoverflow.com/questions/24410881/reading-in-a-json-file-using-swift
+    func saveToJsonFile() {
+        // Get the url of Persons.json in document directory
+        guard let documentDirectoryUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+        let fileUrl = documentDirectoryUrl.appendingPathComponent("Lokaatiot.json")
+        
+        //let personArray =  [["person": ["name": "Dani", "age": "24"]], ["person": ["name": "ray", "age": "70"]]]
+        
+        var GPSLista = [String]()
+        
+        // käydään läpi tallennetut lokaatiot
+        for lokaatio in locationStorage {
+            //print("Läpi käydään lokaatioita")
+            GPSLista.append(String(lokaatio.coordinate.longitude))
+            GPSLista.append(String(lokaatio.coordinate.latitude))
+        }
+        
+        // Create a write-only stream
+        guard let stream = OutputStream(toFileAtPath: fileUrl.path, append: false) else { return }
+        stream.open()
+        defer {
+            stream.close()
+        }
+        
+        // Transform array into data and save it into file
+        var error: NSError?
+        JSONSerialization.writeJSONObject(GPSLista, to: stream, options: [], error: &error)
+        
+        // Handle error
+        if let error = error {
+            print(error)
+        }
+    }
+    
+    // turha, mutta lukee JSONit kuten pitää
+    // tästä mallia saved viewiin
+    
+    func retrieveFromJsonFile() {
+        // Get the url of Persons.json in document directory
+        guard let documentsDirectoryUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+        let fileUrl = documentsDirectoryUrl.appendingPathComponent("joggerdata432.json")
+        
+        // Create a read-only stream
+        guard let stream = InputStream(url: fileUrl) else { return }
+        stream.open()
+        defer {
+            stream.close()
+        }
+        
+        // Read data from .json file and transform data into an array
+        do {
+            guard let personArray = try JSONSerialization.jsonObject(with: stream, options: []) as? [[String: [String: String]]] else { return }
+            print(personArray) // prints [["person": ["name": "Dani", "age": "24"]], ["person": ["name": "ray", "age": "70"]]]
+        } catch {
+            print(error)
+        }
+    }
+    
+    
+    
 }
 

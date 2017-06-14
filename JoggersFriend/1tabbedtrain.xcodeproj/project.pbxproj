@@ -23,6 +23,7 @@
 		2B03DA391EE00E21005622BB /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B03DA381EE00E21005622BB /* InfoViewController.swift */; };
 		2B03DA3B1EE00E80005622BB /* SavedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B03DA3A1EE00E80005622BB /* SavedViewController.swift */; };
 		2B03DA3D1EE00EDC005622BB /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B03DA3C1EE00EDC005622BB /* AboutViewController.swift */; };
+		2B0DD4011EEECC9F000BEEC3 /* Lokaatiot.json in Resources */ = {isa = PBXBuildFile; fileRef = 2B0DD4001EEECC9F000BEEC3 /* Lokaatiot.json */; };
 		2BA2F7811EDFFF8000AAD81A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA2F7801EDFFF8000AAD81A /* AppDelegate.swift */; };
 		2BA2F7831EDFFF8000AAD81A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA2F7821EDFFF8000AAD81A /* ViewController.swift */; };
 		2BA2F7861EDFFF8000AAD81A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BA2F7841EDFFF8000AAD81A /* Main.storyboard */; };
@@ -52,6 +53,7 @@
 		2B03DA381EE00E21005622BB /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		2B03DA3A1EE00E80005622BB /* SavedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedViewController.swift; sourceTree = "<group>"; };
 		2B03DA3C1EE00EDC005622BB /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		2B0DD4001EEECC9F000BEEC3 /* Lokaatiot.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Lokaatiot.json; sourceTree = "<group>"; };
 		2BA2F77D1EDFFF8000AAD81A /* 1tabbedtrain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 1tabbedtrain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BA2F7801EDFFF8000AAD81A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2BA2F7821EDFFF8000AAD81A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				2BA2F7941EE00A1800AAD81A /* ic_home_18pt_2x.png */,
 				2BA2F7951EE00A1800AAD81A /* ic_home_18pt_3x.png */,
 				2BA2F7961EE00A1800AAD81A /* ic_home_18pt.png */,
+				2B0DD4001EEECC9F000BEEC3 /* Lokaatiot.json */,
 			);
 			path = 1tabbedtrain;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 				2B03DA361EE00DED005622BB /* ic_star_rate_18pt_3x.png in Resources */,
 				2B03DA371EE00DED005622BB /* ic_star_rate_18pt.png in Resources */,
 				2BA2F7861EDFFF8000AAD81A /* Main.storyboard in Resources */,
+				2B0DD4011EEECC9F000BEEC3 /* Lokaatiot.json in Resources */,
 				2B03DA2B1EE00DD3005622BB /* ic_info_18pt.png in Resources */,
 				2B03DA221EE00C51005622BB /* ic_my_location_18pt_3x.png in Resources */,
 				2B03DA311EE00DE0005622BB /* ic_attachment_18pt.png in Resources */,
@@ -349,7 +353,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 483JXVMV3V;
 				INFOPLIST_FILE = 1tabbedtrain/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tn.-tabbedtrain";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -363,7 +367,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 483JXVMV3V;
 				INFOPLIST_FILE = 1tabbedtrain/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tn.-tabbedtrain";
 				PRODUCT_NAME = "$(TARGET_NAME)";
